@@ -2,6 +2,9 @@ import React from "react";
 import ISSIntro from "./ISSIntro.js";
 import WheresISS from "./WheresISS";
 import WhenCanISee from "./WhenCanISee";
+import "./ISS.css";
+
+
 const ISS = (props) => {
 
   if (props.staticLocation !== undefined) {
@@ -10,6 +13,7 @@ const ISS = (props) => {
         <ISSIntro />
         <WheresISS staticLocation={props.staticLocation} />
         <WhenCanISee />
+
       </div>
     )
   }else {

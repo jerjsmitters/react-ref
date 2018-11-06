@@ -10,7 +10,7 @@ class App extends Component {
 
   state = {};
 
-  componentWillMount(){
+  componentDidMount(){
     fetch('http://api.open-notify.org/iss-now.json')
     .then(res=>res.json())
     .then(res=>this.setState({staticLocation: res.iss_position}));
