@@ -1,9 +1,7 @@
 import React from 'react';
 import SimpleExample from './SimpleExample';
-import cities from 'cities.json';
 
 const WheresISS = (props) => {
-
   return(
     <div id="wheresISS">
       <h2>So, where is it right now?</h2>
@@ -11,8 +9,7 @@ const WheresISS = (props) => {
           Latitude: {props.staticLocation.latitude} deg <br/>
           Longitude: {props.staticLocation.longitude} deg <br/>
           <span>It is currently flying over: </span> <br/>
-          At time: 
-
+          At time:
         </p>
 
         <SimpleExample  lat={props.staticLocation.latitude}

@@ -13,7 +13,6 @@ const ISS = (props) => {
         <ISSIntro />
         <WheresISS staticLocation={props.staticLocation} />
         <WhenCanISee />
-
       </div>
     )
   }else {

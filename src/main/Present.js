@@ -1,6 +1,6 @@
 import React from "react";
 import CurrentAct from "./CurrentAct";
-import ISS from "./ISS/ISS"
+import ISS from "./ISS/ISS";
 const Present = (props) => {
   return (
     <div>

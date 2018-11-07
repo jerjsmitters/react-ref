@@ -10,7 +10,9 @@ class WhenCanISee extends Component{
                     city: '',
                     postcode: '',
                     country: '',
-                    unsubmitted:'true'
+                    unsubmitted:'true',
+                    latlong: '',
+                    oneTime: 'true'
                   };
 
     this.handleChangeHouse = this.handleChangeHouse.bind(this);
@@ -42,29 +44,27 @@ class WhenCanISee extends Component{
     this.setState({country: e.target.value})
   }
 
-  queryStringify(obj){
-    obj.house.replace(" ", "+");
-    obj.street.replace(" ", "+");
-    obj.city.replace(" ", "+");
-    obj.postcode.replace(" ", "+");
-    obj.country.replace(" ", "+");
-  }
-
   handleSubmit(e){
+    e.preventDefault();
     let formData = this.state;
-    this.queryStringify(formData);
-    this.setState({SubmittedData: formData});
+    let queryFormData = formData; //Converting to query string format
+    for (let key in queryFormData){
+      queryFormData[key] = formData[key].replace(" ", "+")
+    }
+    this.setState({SubmittedData: queryFormData});
     this.setState({unsubmitted: false});
     this.setState({house: '', street: '', city: '', postcode: '', country:''})
-    e.preventDefault();
-    // fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.SubmittedData.house}
-    //                                                       +${this.state.SubmittedData.street}%2C
-    //                                                       +${this.state.SubmittedData.city}%2C
-    //                                                       +${this.state.SubmittedData.postcode}%2C
-    //                                                       +${this.state.SubmittedData.country}&key=4bce3196ed394283829ac362c59f8932`)
-    // .then(res=>res.json())
-    // .then(res=> console.log(res.results[0].geometry));
   }
+
+  componentDidUpdate(){
+    if (!this.state.unsubmitted && this.state.oneTime){
+      fetch(`https://eu1.locationiq.com/v1/search.php?key=c0108f620d30b3&q=${this.state.SubmittedData.house.toString()}+${this.state.SubmittedData.street.toString()}%2C+${this.state.SubmittedData.city.toString()}%2C+${this.state.SubmittedData.postcode.toString()}%2C+${this.state.SubmittedData.country.toString()}&format=json`)
+
+      .then(res=>res.json())
+      .then(res=>this.setState({latlong: {lat: res[0].lat, long: res[0].lon}}));
+      this.setState({oneTime: false});
+  }
+}
 
 
   render() {
@@ -72,7 +72,7 @@ class WhenCanISee extends Component{
       <div id="whenCanISee">
         <h2>When can I see it?</h2>
         <form>
-          <p>Please enter your address. Feel free to only leave some fields blank (within reason)</p>
+          <p>Please enter your address. Feel free to only leave some fields blank (within reason, don't just type in your country).</p>
           <label>House number</label>
           <input
               type="text"
@@ -99,7 +99,8 @@ class WhenCanISee extends Component{
             value={this.state.country}
             onChange={this.handleChangeCountry} />
           <button onClick = {e => this.handleSubmit(e)}>Submit</button>
-          <WhenData unsubmitted={this.state.unsubmitted} locData={this.state.SubmittedData}/>
+          <WhenData unsubmitted={this.state.unsubmitted}
+                    latlong={this.state.latlong}/>
 
         </form>
       </div>

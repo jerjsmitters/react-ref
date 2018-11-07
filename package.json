@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cities.json": "^1.1.5",
+    "cors-anywhere": "^0.4.1",
     "leaflet": "^1.3.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
