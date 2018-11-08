@@ -10,9 +10,9 @@ class WhenCanISee extends Component{
                     city: '',
                     postcode: '',
                     country: '',
-                    unsubmitted:'true',
+                    unsubmitted: true,
                     latlong: '',
-                    oneTime: 'true'
+                    showing: false
                   };
 
     this.handleChangeHouse = this.handleChangeHouse.bind(this);
@@ -47,7 +47,9 @@ class WhenCanISee extends Component{
   handleSubmit(e){
     e.preventDefault();
     let formData = this.state;
-    let queryFormData = formData; //Converting to query string format
+    let queryFormData = formData;
+    delete queryFormData.showing;
+    delete queryFormData.unsubmitted;
     for (let key in queryFormData){
       queryFormData[key] = formData[key].replace(" ", "+")
     }
@@ -57,14 +59,21 @@ class WhenCanISee extends Component{
   }
 
   componentDidUpdate(){
-    if (!this.state.unsubmitted && this.state.oneTime){
+    if (!this.state.unsubmitted && !this.state.showing){
       fetch(`https://eu1.locationiq.com/v1/search.php?key=c0108f620d30b3&q=${this.state.SubmittedData.house.toString()}+${this.state.SubmittedData.street.toString()}%2C+${this.state.SubmittedData.city.toString()}%2C+${this.state.SubmittedData.postcode.toString()}%2C+${this.state.SubmittedData.country.toString()}&format=json`)
-
       .then(res=>res.json())
-      .then(res=>this.setState({latlong: {lat: res[0].lat, long: res[0].lon}}));
-      this.setState({oneTime: false});
+      .then(res=>{console.log(res);
+        return this.setState({latlong: {lat: res[0].lat, long: res[0].lon}})
+        }
+      )
+
+      // .then(fetch(`https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${this.props.latlong.lat}&lon=${this.props.latlong.long}`)
+      //   .then(res => res.json())
+      //   .then(res => this.setState({passingTimes: res.response}))
+      // )
+      .then(()=>this.setState({showing: true}));
+    }
   }
-}
 
 
   render() {

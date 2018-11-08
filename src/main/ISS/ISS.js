@@ -1,28 +1,31 @@
-import React from "react";
+import React, {Component} from "react";
 import ISSIntro from "./ISSIntro.js";
 import WheresISS from "./WheresISS";
 import WhenCanISee from "./WhenCanISee";
 import "./ISS.css";
 
 
-const ISS = (props) => {
+class ISS extends Component{
 
-  if (props.staticLocation !== undefined) {
-    return (
-      <div>
-        <ISSIntro />
-        <WheresISS staticLocation={props.staticLocation} />
-        <WhenCanISee />
-      </div>
-    )
-  }else {
-    return(
-      <div>
-        <p>Please wait...</p>
-      </div>
-    )
+  render(){
+    if (this.props.staticLocation !== undefined) {
+      return (
+        <div>
+          <ISSIntro />
+          <WheresISS staticLocation={this.props.staticLocation} />
+          <WhenCanISee />
+        </div>
+      )
+
+    }else {
+      return(
+        <div>
+          <p>Please wait...</p>
+        </div>
+      )
+    }
+
   }
-
 }
 
 export default ISS;
