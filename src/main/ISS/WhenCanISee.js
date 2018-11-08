@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import WhenData from './WhenData';
+import ISSTimes from './ISSTimes';
+import 'cors-anywhere';
 
 class WhenCanISee extends Component{
   constructor(){
@@ -10,9 +11,11 @@ class WhenCanISee extends Component{
                     city: '',
                     postcode: '',
                     country: '',
-                    unsubmitted: true,
+                    submitted: false, //prevents update running before submission
                     latlong: '',
-                    showing: false
+                    timearray: '',
+                    showing: false, //prevents constinuous looping
+                    updateComplete: false //forces ISSTimes to wait for API data before rendering
                   };
 
     this.handleChangeHouse = this.handleChangeHouse.bind(this);
@@ -49,31 +52,50 @@ class WhenCanISee extends Component{
     let formData = this.state;
     let queryFormData = formData;
     delete queryFormData.showing;
-    delete queryFormData.unsubmitted;
+    delete queryFormData.submitted;
+    delete queryFormData.updateComplete;
     for (let key in queryFormData){
       queryFormData[key] = formData[key].replace(" ", "+")
     }
-    this.setState({SubmittedData: queryFormData});
-    this.setState({unsubmitted: false});
-    this.setState({house: '', street: '', city: '', postcode: '', country:''})
+    this.setState({SubmittedData: queryFormData}, ()=>{
+      return(this.setState({submitted: true}, ()=>{
+        return(this.setState({house: '', street: '', city: '', postcode: '', country:''}))
+      }))
+    });
   }
 
   componentDidUpdate(){
-    if (!this.state.unsubmitted && !this.state.showing){
-      fetch(`https://eu1.locationiq.com/v1/search.php?key=c0108f620d30b3&q=${this.state.SubmittedData.house.toString()}+${this.state.SubmittedData.street.toString()}%2C+${this.state.SubmittedData.city.toString()}%2C+${this.state.SubmittedData.postcode.toString()}%2C+${this.state.SubmittedData.country.toString()}&format=json`)
+    if (this.state.submitted && !this.state.showing){
+      this.setState({showing: true});
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.SubmittedData.house.toString()}+${this.state.SubmittedData.street.toString()}%2C+${this.state.SubmittedData.city.toString()}%2C+${this.state.SubmittedData.postcode.toString()}%2C+${this.state.SubmittedData.country.toString()}&format=json&key=AIzaSyDh_B-mkxNrPY3hyP3F_QQHcQgXn0AHyXs`)
       .then(res=>res.json())
-      .then(res=>{console.log(res);
-        return this.setState({latlong: {lat: res[0].lat, long: res[0].lon}})
-        }
-      )
-
-      // .then(fetch(`https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${this.props.latlong.lat}&lon=${this.props.latlong.long}`)
-      //   .then(res => res.json())
-      //   .then(res => this.setState({passingTimes: res.response}))
-      // )
-      .then(()=>this.setState({showing: true}));
+      .then(data => {console.log(data);
+        return this.setState({latlong: {lat: data.results[0].geometry.location.lat, long: data.results[0].geometry.location.lng}}, ()=>{
+          fetch(`https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${this.state.latlong.lat}&lon=${this.state.latlong.long}`)
+          .then(res=>res.json())
+          .then(data=> {console.log(data);
+            return this.setState({timearray: data.response}, ()=> this.setState({updateComplete:true})
+            )
+          })
+        })
+      })
+      .catch((err)=>{console.log(err)})
     }
   }
+
+  renderTimes(){ //Generates ISS flyover time components
+    if (this.state.updateComplete) { return(
+      this.state.timearray.map(entry =>
+        <ISSTimes
+          beginTime={entry.risetime}
+          duration={entry.duration}
+          key = {this.state.timearray.indexOf(entry)} />
+      )
+    )} else {
+      return null
+    }
+  }
+
 
 
   render() {
@@ -108,9 +130,7 @@ class WhenCanISee extends Component{
             value={this.state.country}
             onChange={this.handleChangeCountry} />
           <button onClick = {e => this.handleSubmit(e)}>Submit</button>
-          <WhenData unsubmitted={this.state.unsubmitted}
-                    latlong={this.state.latlong}/>
-
+          <ul>{this.renderTimes()}</ul>
         </form>
       </div>
     )
