@@ -9,16 +9,18 @@ class Missions extends Component {
     super();
     this.state = {menu: true, m0:false, m1: false, m2: false, m3: false, m4: false, m5: false, m6: false, m7: false, m8: false, m9: false};
     this.handleMissionState = this.handleMissionState.bind(this);
+    this.handleBackButton = this.handleBackButton.bind(this);
   }
-
-
 
   handleMissionState(mission){
     const resetState = {menu: false, m0: false, m1: false, m2: false, m3: false, m4: false, m5: false, m6: false, m7: false, m8: false, m9: false};
-    this.setState(resetState, ()=> this.setState({[mission]: true},
+    this.setState(resetState, ()=> this.setState({[mission]: true}))
+  }
 
-    )
-  )}
+  handleBackButton(){
+    const initState = {menu: true, m0: false, m1: false, m2: false, m3: false, m4: false, m5: false, m6: false, m7: false, m8: false, m9: false}
+    this.setState(initState)
+  }
 
 
 
@@ -36,6 +38,7 @@ class Missions extends Component {
                       wikipedia = {mission.wikipedia}
                       twitter = {mission.twitter}
                       description = {mission.description}
+                      backButton = {this.handleBackButton}
                       />
                     );
                     missionNames = this.props.missions.map(mission => mission.mission_name)
@@ -58,8 +61,6 @@ class Missions extends Component {
 
 
     return(
-
-
       <div id="missionCont">
       {displayedMission}
       </div>

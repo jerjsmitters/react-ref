@@ -4,6 +4,9 @@ import Slider from "react-slick";
 
 
 class AchievementsTL extends Component{
+
+
+
   render(){
     let achieveArray;
     if (this.props.achievements){achieveArray = this.props.achievements.map(achievement =>

@@ -11,24 +11,27 @@ const MissionUnit = (props) => {
       })
 
     return(
-      <ul>
-        <li><h3>{props.mission_name}</h3></li>
-        <li>Manufacturer(s)
-          <ul>
-            {manuArray}
-          </ul>
-        </li>
-        <li>Payload(s)
-          <ul>
-            {payloadArr}
-          </ul>
-        </li>
-        <li>{props.description}</li>
-        <li>Read more about it here: {props.wikipedia}</li>
+      <div class="missionUnit">
+        <button onClick={()=>props.backButton()}>Menu</button>
+        <ul>
+          <li><h3>{props.mission_name}</h3></li>
+          <li>Manufacturer(s)
+            <ul>
+              {manuArray}
+            </ul>
+          </li>
+          <li>Payload(s)
+            <ul>
+              {payloadArr}
+            </ul>
+          </li>
+          <li>{props.description}</li>
+          <li>Read more about it here: {props.wikipedia}</li>
 
-        <li>Website: {props.website}</li>
-        <li>Twitter: {props.twitter}</li>
-      </ul>
+          <li>Website: {props.website}</li>
+          <li>Twitter: {props.twitter}</li>
+        </ul>
+      </div>
     )
   } else {
     return(
