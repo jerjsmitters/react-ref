@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import {BrowserRouter, Route} from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
-import Home from "./main/Home";
-import Past from "./main/Past";
-import Present from "./main/Present";
-import Future from "./main/Future";
+import Header from "./Universal/Header";
+import Nav from "./Universal/Nav";
+import Footer from "./Universal/Footer";
+import SpaceX from "./main/SpaceX/SpaceX";
+import ISS from "./main/ISS/ISS";
+import Home from "./main/Home/Home";
 class App extends Component {
 
   state = {};
@@ -20,15 +20,14 @@ class App extends Component {
     return (
       <div className = "container">
         <Header />
+        <Nav />
         <BrowserRouter>
           <div className = "mainContain">
             <Route exact path ="/" component={Home} />
-            <Route exact path = "/past" component = {Past} />
-            <Route exact path = "/present" render={ () => <Present staticLocation = {this.state.staticLocation}/> } />
-            <Route exact path = "/future" component = {Future} />
+            <Route path = "/ISS" render={ () => <ISS staticLocation = {this.state.staticLocation}/> } />
+            <Route path = "/spacex" component = {SpaceX} />
           </div>
         </BrowserRouter>
-        <Footer />
       </div>
     );
   }

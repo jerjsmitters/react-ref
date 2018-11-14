@@ -1,4 +1,53 @@
+/*    Universal Styles */
+* {
+  box-sizing: border-box;
+}
 .map {
   height: 200px;
   width:400px;
+}
+
+body {
+  background-image: url('./img/background.jpg');
+  background-attachment: fixed;
+  background-repeat:no-repeat;
+  background-size: 100% 115%
+
+}
+
+#headerMain {
+  color: #fff;
+  font-family: 'Spicy Rice', cursive;
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 89px;
+  text-align: center;
+  text-shadow: 3px 0px 1px #000, 0px -3px 1px #000, 0px 3px 1px #000, -3px 0px 1px #000;
+  letter-spacing: 1.2px;
+  position: relative;
+  margin-bottom: 0px;
+}
+
+#headerSecondary{
+  font-size: 24px;
+  line-height: normal;
+  text-align: center;
+  font-weight: 400;
+  color: #fff;
+  font-family: 'Righteous', cursive;
+  text-shadow: 3px 0px 3px #000, 0px -2px 5px #000, 0px 2px 2px #000, -2px 0px 2px #000;
+  margin-top: 0;
+  letter-spacing: 1px;
+}
+
+#spaceman {
+  position: absolute;
+  width: 112px;
+  left: 620px;
+  top: -8px;
+}
+
+.component {
+  background-color: #8C7CAC;
+  border: 1px solid #544A67;
 }
