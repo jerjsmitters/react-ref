@@ -6,6 +6,7 @@ import Launches from './Launches/Launches.js';
 import Vehicles from './Vehicles/Vehicles.js';
 import Tech from './Tech/Tech.js';
 import NotFound from './../../Universal/NotFound.js'
+import SpaceXNav from './SpaceXNav';
 
 
 
@@ -19,6 +20,7 @@ class SpaceX extends Component{
                   history: '',
 
                   //Activity
+                  allLaunches: '',
                   pastLaunches: '',
                   upcomingLaunches: '',
                   nextLaunch: '',
@@ -55,6 +57,7 @@ class SpaceX extends Component{
       const urlStateArray = [
                               ['companyInfo', sxurl+'info'],
                               ['missions', sxurl+'missions'],
+                              ['allLaunches', sxurl+'launches'],
                               ['pastLaunches', sxurl+'launches/past'],
                               ['upcomingLaunches', sxurl+'launches/upcoming'],
                               ['latestLaunch', sxurl+'launches/latest'],
@@ -81,7 +84,8 @@ class SpaceX extends Component{
                        missions: this.state.missions,
                        history: this.state.history};
 
-    const launchData = {pastLaunches: this.state.pastLaunches,
+    const launchData = {  allLaunches: this.state.allLaunches,
+                          pastLaunches: this.state.pastLaunches,
                           upcomingLaunches: this.state.upcomingLaunches,
                           nextLaunch: this.state.nextLaunch,
                           latestLaunch: this.state.latestLaunch};
@@ -91,7 +95,7 @@ class SpaceX extends Component{
                          dragons: this.state.dragons,
                          rockets: this.state.rockets};
 
-    const techData = {capules: this.state.capsules,
+    const techData = {capsules: this.state.capsules,
                       cores: this.state.cores,
                       launchPads: this.state.launchPads,
                       landingPads: this.state.landingPads,
@@ -101,10 +105,11 @@ class SpaceX extends Component{
     return(
 
         <div className = "spaceXContain">
+          <SpaceXNav />
           <Switch>
             <Route path= "/spacex/about" render ={ () => <About about={aboutData}/>} />
-            <Route path = "/spacex/launches" render={ () => <Launches launch={launchData}/>} />
-            <Route path = "/spacex/vehicles" render={ () => <Vehicles vehicle={vehicleData}/>} />
+            <Route path = "/spacex/launches" render={ () => <Launches launches={launchData}/>} />
+            <Route path = "/spacex/vehicles" render={ () => <Vehicles vehicles={vehicleData}/>} />
             <Route path = "/spacex/tech" render={ () => <Tech tech={techData}/>} />
             <Route component = {NotFound} />
           </Switch>

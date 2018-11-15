@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LatestLaunch = (props) => {
+const NextLaunch = (props) => {
 
   return(
-    null
+    <div id="nextLaunch">Next Launch!</div>
   )
 }
 
-export default LatestLaunch;
+export default NextLaunch;

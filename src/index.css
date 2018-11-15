@@ -12,9 +12,19 @@ body {
   background-attachment: fixed;
   background-repeat:no-repeat;
   background-size: 100% 115%
-
 }
 
+.mainContainer{
+  width: 1800px;
+  height: 720px;
+  margin: 0 auto;
+  border: 2px black solid;
+  padding: 10px;
+  border-radius: 50px;
+  background-color: rgba(200,200,200,0.5);
+}
+
+/**************Header********/
 #headerMain {
   color: #fff;
   font-family: 'Spicy Rice', cursive;
@@ -50,4 +60,21 @@ body {
 .component {
   background-color: #8C7CAC;
   border: 1px solid #544A67;
+}
+
+/********** SpaceX Nav ************/
+
+#spaceXContain {
+  position:relative;
+}
+#spaceXNav{
+  position:absolute;
+  top: 20px;
+  left: 20px;
+}
+#spaceXNav a{
+  color: black;
+  background-color: grey;
+  padding: 10px;
+  border: 1px black solid;
 }

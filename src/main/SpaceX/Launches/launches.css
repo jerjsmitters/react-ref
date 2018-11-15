@@ -1,0 +1,23 @@
+#launchIntro{
+  border-bottom: 1px solid black;
+  height: 60px;
+  margin-bottom: 10px;
+}
+/*intro at top, next to right, previous to left, main in middle*/
+#launchCol {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#mainLaunch{
+  border: 1px solid black;
+  height: 600px;
+  width: 1075px;
+}
+
+#latestLaunch, #nextLaunch {
+height: 600px;
+width: 325px;
+border: 1px solid black;
+}

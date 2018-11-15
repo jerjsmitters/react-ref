@@ -7,7 +7,7 @@ const About = (props) => {
 
   if (props.about){
     return(
-      <div id = 'aboutContainer'>
+      <div id = 'aboutContainer' class="mainContainer">
         <div id='twoCol'>
           <AboutSpaceX info={props.about.companyInfo}/>
           <Missions missions={props.about.missions}/>

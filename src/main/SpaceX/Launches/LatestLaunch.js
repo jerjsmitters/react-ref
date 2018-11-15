@@ -3,7 +3,9 @@ import React from 'react';
 const LatestLaunch = (props) => {
 
   return(
-    null
+    <div id="latestLaunch">
+      Latest launch!
+    </div>
   )
 }
 
