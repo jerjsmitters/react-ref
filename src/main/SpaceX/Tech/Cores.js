@@ -3,7 +3,7 @@ import React from 'react';
 const Cores = (props) => {
 
   return(
-    null
+    <div id="cores">cores</div>
   )
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 const LandingPads = (props) => {
 
   return(
-    null
+    <div id="landingPads">landingPads</div>
   )
 }
 

@@ -3,7 +3,7 @@ import React from 'react';
 const Boats = (props) => {
 
   return(
-    null
+    <div id="boats">boats</div>
   )
 }
 

@@ -4,6 +4,7 @@ import Roadster from './Roadster.js';
 import Dragons from './Dragons.js';
 import Rockets from './Rockets.js';
 import Boats from './Boats.js';
+import './vehicles.css';
 
 
 class Vehicles extends Component{
@@ -12,10 +13,14 @@ class Vehicles extends Component{
     return(
       <div id="vehicleCont" class="mainContainer">
         <VehicleIntro />
-        <Roadster roadster={this.props.vehicles.roadster}/>
-        <Dragons dragons={this.props.vehicles.dragons}/>
-        <Rockets rockets={this.props.vehicles.rockets}/>
-        <Boats boats={this.props.vehicles.boats}/>
+        <div id="vehicleCol">
+          <Dragons dragons={this.props.vehicles.dragons}/>
+          <Rockets rockets={this.props.vehicles.rockets}/>
+          <div id="vehicleRow">
+            <Roadster roadster={this.props.vehicles.roadster}/>
+            <Boats boats={this.props.vehicles.boats}/>
+          </div>
+        </div>
       </div>
     )
   }

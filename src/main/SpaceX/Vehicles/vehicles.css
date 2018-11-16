@@ -1,0 +1,19 @@
+#vehicleCol{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#roadster,
+#boats{
+  border: 1px solid black;
+  height: 300px;
+  width: 725px;
+}
+
+#dragons,
+#rockets{
+  border: 1px solid black;
+  height: 600px;
+  width: 500px;
+}

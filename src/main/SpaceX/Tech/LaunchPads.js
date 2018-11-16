@@ -3,7 +3,7 @@ import React from 'react';
 const LaunchPads = (props) => {
 
   return(
-    null
+    <div id="launchPads">launchPads</div>
   )
 }
 

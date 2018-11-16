@@ -1,8 +1,4 @@
-#launchIntro{
-  border-bottom: 1px solid black;
-  height: 60px;
-  margin-bottom: 10px;
-}
+
 /*intro at top, next to right, previous to left, main in middle*/
 #launchCol {
   display:flex;
@@ -14,10 +10,54 @@
   border: 1px solid black;
   height: 600px;
   width: 1075px;
+  overflow-y: scroll;
 }
 
-#latestLaunch, #nextLaunch {
+#latestLaunch,
+#nextLaunch {
 height: 600px;
 width: 325px;
 border: 1px solid black;
+}
+
+#latestLaunch>ul{
+  padding-left: 0;
+  list-style: none;
+}
+
+#nextLaunch>ul{
+  padding-left: 0;
+  list-style: none;
+}
+
+.launchTime {
+  margin-top: 0;
+}
+
+/*****Main launch*****/
+/**filters**/
+#filters{
+  height: 70px;
+  border-bottom: 1px solid black;
+  position:sticky;
+  top:0px;
+}
+
+#filters>p {
+  margin-top:0;
+}
+/***results***/
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.resultUnit {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
 }

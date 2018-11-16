@@ -103,7 +103,6 @@ class SpaceX extends Component{
 
 
     return(
-
         <div className = "spaceXContain">
           <SpaceXNav />
           <Switch>

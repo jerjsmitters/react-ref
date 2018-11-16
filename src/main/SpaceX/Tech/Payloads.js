@@ -3,7 +3,7 @@ import React from 'react';
 const Payloads = (props) => {
 
   return(
-    null
+    <div id="payloads">payloads</div>
   )
 }
 
