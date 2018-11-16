@@ -57,7 +57,10 @@ class Launches extends Component{
 
           <MainLaunch allLaunches={this.props.launches.allLaunches}
                       pastLaunches={this.props.launches.pastLaunches}
-                      upcomingLaunches = {this.props.launches.upcomingLaunches}/>
+                      upcomingLaunches = {this.props.launches.upcomingLaunches}
+                      corePopulator={this.corePopulatorFut}
+                      imagePopulator={this.imagePopulator}
+                      payloadPopulator={this.payloadPopulator}/>
 
           <NextLaunch nextLaunch={this.props.launches.nextLaunch}
                       payloadPopulator={this.payloadPopulator}

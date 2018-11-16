@@ -3,7 +3,7 @@ import React from 'react';
 const ResultUnit = (props) => {
 
   return(
-    <div className="resultUnit">
+    <div className="resultUnit" onClick={()=>props.showLaunchStateChanger(props.flight_number)}>
       <p>{props.flight_number} <br/> {props.launch_date_utc}</p>
     </div>
   )

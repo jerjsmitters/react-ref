@@ -10,12 +10,25 @@ class MainLaunch extends Component {
     super();
     this.state = {};
     this.setInitState = this.setInitState.bind(this);
+    this.showLaunchStateChanger = this.showLaunchStateChanger.bind(this);
+    this.whichLaunchStateIsActive = this.whichLaunchStateIsActive.bind(this);
   }
 
   setInitState(){
     if(this.props.allLaunches){
-      this.props.allLaunches.map(launch=>this.setState({['r'+launch.flight_number]: true})); //Result
       this.props.allLaunches.map(launch=>this.setState({['a'+launch.flight_number]: false})); //Active (displayedLaunch)
+    }
+  }
+
+  showLaunchStateChanger(flightNumber){
+    this.setState({['a'+flightNumber]: true})
+  }
+
+  whichLaunchStateIsActive(state){ //Loops to see which state is true
+    for (let key in state){
+      if(state[key]){
+        return key
+      }
     }
   }
 
@@ -23,13 +36,19 @@ class MainLaunch extends Component {
     setTimeout(this.setInitState, 1000) //This is probably bad practice, but I am yet to find a workaround
   }
 
+
   render(){
 
     return(
       <div id="mainLaunch">
         <Filters allLaunches={this.props.allLaunches}/>
-        <Results allLaunches={this.props.allLaunches}/> {/*Displays until the one is clicked, brings up displayed launch*/}
-        <DisplayedLaunch allLaunches={this.props.allLaunches}/> {/*Displays only once a display is clicked*/}
+        {(!this.whichLaunchStateIsActive(this.state)) ? (<Results allLaunches={this.props.allLaunches} showLaunchStateChanger={this.showLaunchStateChanger}/>) : null}
+        <DisplayedLaunch allLaunches={this.props.allLaunches}
+                          payloadPopulator={this.props.payloadPopulator}
+                          corePopulator={this.props.corePopulator}
+                          activeState={this.whichLaunchStateIsActive(this.state)}
+                          imagePopulator={this.props.imagePopulator}
+                          />
       </div>
     )
   }

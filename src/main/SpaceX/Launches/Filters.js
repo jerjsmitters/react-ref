@@ -40,27 +40,48 @@ const Filters = (props) => {
     payloadFilterArr = <option>loading</option>
   }
 
+  let coresPreSort;
+  let coresSorted;
+  let coresFilterArr;
+
+  if (props.allLaunches){
+    coresPreSort = props.allLaunches.map(launch => launch.rocket.first_stage.cores[0].core_serial);
+    coresSorted = removeDuplicates(coresPreSort);
+    coresFilterArr = coresSorted.map(cores => <option value={cores}>{cores}</option>)
+  } else{
+    coresFilterArr = <option>loading</option>
+  }
+
   return(
     <div id="filters">
       <p>Launch Catalogue</p>
       <span>Filter by:</span>
       <select name="success">
+        <option value="na">-</option>
         <option value="successful">Successful</option>
         <option value="unsuccessful">unsuccessful</option>
       </select>
       <select name="time">
+        <option value="na">-</option>
         <option value="past">Past</option>
         <option value="future">Future</option>
       </select>
       <select name="Recovered">
+        <option value="na">-</option>
         <option value="recovered">Recovered</option>
         <option value="unrecovered">Unrecovered</option>
       </select>
       <select name="rocketName">
+        <option value="na">-</option>
         {rocketsFilterArr}
       </select>
       <select name="payloadName">
+        <option value="na">-</option>
         {payloadFilterArr}
+      </select>
+      <select name="coresName">
+        <option value="na">-</option>
+        {coresFilterArr}
       </select>
     </div>
   )

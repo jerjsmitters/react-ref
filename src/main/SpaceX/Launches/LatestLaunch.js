@@ -15,7 +15,7 @@ const LatestLaunch = (props) => {
           <li>Rocket: {props.latestLaunch.rocket.rocket_name}</li>
           <li>Payloads: <ul>{props.payloadPopulator(props.latestLaunch.rocket.second_stage.payloads)}</ul></li>
           <li>Cores: <ul>{props.corePopulator(props.latestLaunch.rocket.first_stage.cores)}</ul></li>
-          <li>Recovered: {props.latestLaunch.rocket.fairings.recovered.toString()} Attempted to recover: {props.latestLaunch.rocket.fairings.recovery_attempt.toString()}</li>
+          <li>Recovered: {props.latestLaunch.rocket.fairings.recovered.toString()}<br/> Attempted to recover: {props.latestLaunch.rocket.fairings.recovery_attempt.toString()}</li>
           <li>Launch site:{props.latestLaunch.launch_site.site_name}</li>
           <li>{props.latestLaunch.details}</li>
           <li>Other resources:
