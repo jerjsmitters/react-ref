@@ -20,37 +20,35 @@ const Filters = (props) => {
   let rocketsPreSort;
   let rocketsSorted;
   let rocketsFilterArr;
-  if (props.allLaunches){
-    rocketsPreSort = props.allLaunches.map(launch => launch.rocket.rocket_name);
-    rocketsSorted = removeDuplicates(rocketsPreSort);
-    rocketsFilterArr = rocketsSorted.map(rocket => <option value={rocket}>{rocket}</option>)
-  } else{
-    rocketsFilterArr = <option>loading</option>
-  }
-
   let payloadPreSort;
   let payloadSorted;
   let payloadFilterArr;
-
-  if (props.allLaunches){
-    payloadPreSort = props.allLaunches.map(launch => launch.rocket.second_stage.payloads[0].payload_type);
-    payloadSorted = removeDuplicates(payloadPreSort);
-    payloadFilterArr = payloadSorted.map(payload => <option value={payload}>{payload}</option>)
-  } else{
-    payloadFilterArr = <option>loading</option>
-  }
-
   let coresPreSort;
   let coresSorted;
   let coresFilterArr;
+  let mrval = true
+  if (props.allLaunches && mrval){
+    rocketsPreSort = props.allLaunches.map(launch => launch.rocket.rocket_name);
+    rocketsSorted = removeDuplicates(rocketsPreSort);
+    rocketsFilterArr = rocketsSorted.map(rocket => <option value={rocket}>{rocket}</option>)
 
-  if (props.allLaunches){
+    payloadPreSort = props.allLaunches.map(launch => launch.rocket.second_stage.payloads[0].payload_type);
+    payloadSorted = removeDuplicates(payloadPreSort);
+    payloadFilterArr = payloadSorted.map(payload => <option value={payload}>{payload}</option>)
+
     coresPreSort = props.allLaunches.map(launch => launch.rocket.first_stage.cores[0].core_serial);
     coresSorted = removeDuplicates(coresPreSort);
     coresFilterArr = coresSorted.map(cores => <option value={cores}>{cores}</option>)
+
+    // props.getDynamicFilters('hello')
+    mrval=false;
+// {rockets: rocketsFilterArr, payloads: payloadFilterArr, cores: coresFilterArr})
   } else{
+    rocketsFilterArr = <option>loading</option>
+    payloadFilterArr = <option>loading</option>
     coresFilterArr = <option>loading</option>
   }
+
 
   return(
     <div id="filters">

@@ -12,6 +12,7 @@ class MainLaunch extends Component {
     this.setInitState = this.setInitState.bind(this);
     this.showLaunchStateChanger = this.showLaunchStateChanger.bind(this);
     this.whichLaunchStateIsActive = this.whichLaunchStateIsActive.bind(this);
+    this.getDynamicFilters = this.getDynamicFilters.bind(this);
   }
 
   setInitState(){
@@ -36,18 +37,22 @@ class MainLaunch extends Component {
     setTimeout(this.setInitState, 1000) //This is probably bad practice, but I am yet to find a workaround
   }
 
+  getDynamicFilters(obj){
+    this.setState({dynamicFilters: obj})
+  }
 
   render(){
 
     return(
       <div id="mainLaunch">
-        <Filters allLaunches={this.props.allLaunches}/>
+        <Filters allLaunches={this.props.allLaunches} getDynamicFilters={this.getDynamicFilters} />
         {(!this.whichLaunchStateIsActive(this.state)) ? (<Results allLaunches={this.props.allLaunches} showLaunchStateChanger={this.showLaunchStateChanger}/>) : null}
         <DisplayedLaunch allLaunches={this.props.allLaunches}
                           payloadPopulator={this.props.payloadPopulator}
                           corePopulator={this.props.corePopulator}
                           activeState={this.whichLaunchStateIsActive(this.state)}
                           imagePopulator={this.props.imagePopulator}
+                          setInitState={this.setInitState}
                           />
       </div>
     )

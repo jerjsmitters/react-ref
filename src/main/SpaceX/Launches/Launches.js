@@ -16,7 +16,8 @@ class Launches extends Component{
   corePopulator(arr){
     for (let i=0;i<arr.length; i++){
       return <li>Core Name: {arr[i].core_serial} <br/>
-                Landing Success: {arr[i].land_success.toString()} {arr[i].landing_intent ? '(intentional)' : '(unintentional)'}</li>;
+                Landing Success: {(arr[i].land_success) ? arr[i].land_success.toString() : 'false'} 
+                {arr[i].landing_intent ? '(intentional)' : '(unintentional)'}</li>;
     }
   }
   corePopulatorFut(arr){
@@ -58,7 +59,7 @@ class Launches extends Component{
           <MainLaunch allLaunches={this.props.launches.allLaunches}
                       pastLaunches={this.props.launches.pastLaunches}
                       upcomingLaunches = {this.props.launches.upcomingLaunches}
-                      corePopulator={this.corePopulatorFut}
+                      corePopulator={this.corePopulator}
                       imagePopulator={this.imagePopulator}
                       payloadPopulator={this.payloadPopulator}/>
 

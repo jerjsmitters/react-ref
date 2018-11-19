@@ -6,10 +6,11 @@ const DisplayedLaunch = (props) => {
   if(props.activeState){
     let index = props.activeState.substring(1);
     index = parseInt(index);
-    let chosenLaunch = props.allLaunches[index];
+    let chosenLaunch = props.allLaunches[index-1];
 
     return(
       <div id="displayedLaunch">
+      <button onClick={(()=>props.setInitState())}>Return to results</button>
         <p>Latest Launch</p>
         <p>Flight #{chosenLaunch.flight_number}: {chosenLaunch.mission_name}</p>
         <p className="launchTime">{chosenLaunch.launch_date_utc}</p>
@@ -17,10 +18,11 @@ const DisplayedLaunch = (props) => {
           <li>Mission Success: {chosenLaunch.launch_success.toString()}</li>
           <li>Rocket: {chosenLaunch.rocket.rocket_name}</li>
           <li>Payloads: <ul>{props.payloadPopulator(chosenLaunch.rocket.second_stage.payloads)}</ul></li>
-          <li>Cores: <ul>{props.corePopulator(chosenLaunch.rocket.first_stage.cores)}</ul></li>
-          <li>Recovered: {chosenLaunch.rocket.fairings.recovered.toString()}<br/> Attempted to recover: {chosenLaunch.rocket.fairings.recovery_attempt.toString()}</li>
+          {(chosenLaunch.rocket.first_stage.cores[0].core_serial) ? (<li>Cores: <ul>{props.corePopulator(chosenLaunch.rocket.first_stage.cores)}</ul></li>) : <li>Cores:N/A</li>}
+          <li>Recovered: {(chosenLaunch.rocket.fairings) ? (chosenLaunch.rocket.fairings.recovered.toString()) : ('N/A')}
+            <br/> Attempted to recover: {(chosenLaunch.rocket.fairings) ? (chosenLaunch.rocket.fairings.recovery_attempt.toString()) : "N/A"}</li>
           <li>Launch site:{chosenLaunch.launch_site.site_name}</li>
-          <li>{chosenLaunch.details}</li>
+          {(chosenLaunch.details) ? <li>{chosenLaunch.details}</li> : null}
           <li>Other resources:
             <ul>
               <li><a href={chosenLaunch.links.wikipedia}>Mission Wiki</a></li>
