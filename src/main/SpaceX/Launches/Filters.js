@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+  let mrval = true
 
 
 const Filters = (props) => {
@@ -26,7 +26,7 @@ const Filters = (props) => {
   let coresPreSort;
   let coresSorted;
   let coresFilterArr;
-  let mrval = true
+
   if (props.allLaunches && mrval){
     rocketsPreSort = props.allLaunches.map(launch => launch.rocket.rocket_name);
     rocketsSorted = removeDuplicates(rocketsPreSort);
@@ -40,7 +40,7 @@ const Filters = (props) => {
     coresSorted = removeDuplicates(coresPreSort);
     coresFilterArr = coresSorted.map(cores => <option value={cores}>{cores}</option>)
 
-    // props.getDynamicFilters('hello')
+    props.getDynamicFilters('hello')
     mrval=false;
 // {rockets: rocketsFilterArr, payloads: payloadFilterArr, cores: coresFilterArr})
   } else{

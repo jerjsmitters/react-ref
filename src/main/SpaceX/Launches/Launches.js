@@ -8,15 +8,17 @@ class Launches extends Component{
 
   constructor(){
     super();
+    this.state = {dynamicFilters: ''}
     this.corePopulator = this.corePopulator.bind(this);
     this.payloadPopulator = this.payloadPopulator.bind(this);
     this.imagePopulator = this.imagePopulator.bind(this);
+    this.getDynamicFilters = this.getDynamicFilters.bind(this);
   }
 
   corePopulator(arr){
     for (let i=0;i<arr.length; i++){
       return <li>Core Name: {arr[i].core_serial} <br/>
-                Landing Success: {(arr[i].land_success) ? arr[i].land_success.toString() : 'false'} 
+                Landing Success: {(arr[i].land_success) ? arr[i].land_success.toString() : 'false'}
                 {arr[i].landing_intent ? '(intentional)' : '(unintentional)'}</li>;
     }
   }
@@ -42,6 +44,9 @@ class Launches extends Component{
     return imgArray;
   }
 
+  getDynamicFilters(obj){
+    this.setState({dynamicFilters: obj})
+  }
 
   render(){
 
@@ -61,7 +66,8 @@ class Launches extends Component{
                       upcomingLaunches = {this.props.launches.upcomingLaunches}
                       corePopulator={this.corePopulator}
                       imagePopulator={this.imagePopulator}
-                      payloadPopulator={this.payloadPopulator}/>
+                      payloadPopulator={this.payloadPopulator}
+                      getDynamicFilters={this.getDynamicFilters}/>
 
           <NextLaunch nextLaunch={this.props.launches.nextLaunch}
                       payloadPopulator={this.payloadPopulator}
