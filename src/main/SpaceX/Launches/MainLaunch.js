@@ -14,9 +14,6 @@ class MainLaunch extends Component {
     this.whichLaunchStateIsActive = this.whichLaunchStateIsActive.bind(this);
     this.setStaticFilter = this.setStaticFilter.bind(this);
     this.setDynamicFilter = this.setDynamicFilter.bind(this);
-    this.unsetStaticFilter = this.unsetStaticFilter.bind(this);
-    this.unsetDynamicFilter = this.unsetDynamicFilter.bind(this);
-
   }
 
   setInitState(){
@@ -44,20 +41,16 @@ class MainLaunch extends Component {
   setDynamicFilter(val, filterType){
     this.setState({dynamicFilter: true,
                   dynamicFilterVal: val,
-                  filterType: filterType})
-  }
-  unsetDynamicFilter(){
-    this.setState({dynamicFilter: false,
-                  dynamicFilterVal: null,
-                  filterType: 'na'})
+                  filterType: filterType,
+                  staticFilter: false,
+                  staticFilterVal: null})
   }
   setStaticFilter(val){
     this.setState({staticFilter: true,
-                  staticFilterVal: val})
-  }
-  unsetStaticFilter(){
-    this.setState({staticFilter: false,
-                  staticFilterVal: null})
+                  staticFilterVal: val,
+                  dynamicFilter: false,
+                  dynamicFilterVal: null,
+                  filterType: null})
   }
 
 

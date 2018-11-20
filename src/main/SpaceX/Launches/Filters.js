@@ -28,13 +28,13 @@ class Filters extends Component{
   }
 
   handleChangeR(event) {
-  this.setState({valueR: event.target.value, valueC: null, valueP: null});
+  this.setState({valueR: event.target.value, valueP: null, valueC: null});
   }
   handleChangeP(event) {
   this.setState({valueP: event.target.value, valueC: null, valueR: null});
   }
   handleChangeC(event) {
-  this.setState({valueC: event.target.value, valueP: null, valueR: null});
+  this.setState({valueC: event.target.value, valueR: null, valueP: null});
   }
 
   componentDidMount(){
@@ -56,15 +56,19 @@ class Filters extends Component{
     if (this.props.allLaunches){
       rocketsPreSort = this.props.allLaunches.map(launch => launch.rocket.rocket_name);
       rocketsSorted = this.removeDuplicates(rocketsPreSort);
-      rocketsFilterArr = rocketsSorted.map(rocket => <option value={rocket}>{rocket}</option>)
+      let optionKey=0;
+      rocketsFilterArr = rocketsSorted.map(rocket => {
+        optionKey+=1;
+        return <option key={optionKey} value={rocket}>{rocket}</option>
+      })
 
       payloadPreSort = this.props.allLaunches.map(launch => launch.rocket.second_stage.payloads[0].payload_type);
       payloadSorted = this.removeDuplicates(payloadPreSort);
-      payloadFilterArr = payloadSorted.map(payload => <option value={payload}>{payload}</option>)
+      payloadFilterArr = payloadSorted.map(payload => {optionKey+=1; return <option key={optionKey} value={payload}>{payload}</option>})
 
       coresPreSort = this.props.allLaunches.map(launch => launch.rocket.first_stage.cores[0].core_serial);
       coresSorted = this.removeDuplicates(coresPreSort);
-      coresFilterArr = coresSorted.map(cores => <option value={cores}>{cores}</option>)
+      coresFilterArr = coresSorted.map(cores => {optionKey+=1; return <option key={optionKey} value={cores}>{cores}</option>})
     } else{
       rocketsFilterArr = <option>loading</option>
       payloadFilterArr = <option>loading</option>
@@ -72,24 +76,25 @@ class Filters extends Component{
     }
 
     if (this.state.value){
-      this.props.setStaticFilter(this.state.value);
-      this.setState({value: null})
-    }else if (this.state.value === 'na') {
-      this.props.unsetStaticFilter();
+      this.props.setStaticFilter(this.state.value); //handles applying the two static filters
       this.setState({value: null});
-      console.log('Im looping!');
+      console.log('You set a static value');
+    }else if (this.state.valueC ==='na'|| this.state.valueP ==='na' || this.state.valueR ==='na'){ //resets filters
+      this.props.setDynamicFilter(null, 'na');
+      console.log('You reset the dynamic filters');
+      this.setState({valueR: null, valueP: null, valueC: null});
     }else if (this.state.valueC){
-      this.props.setDynamicFilter(this.state.valueC, 'core');
+      this.props.setDynamicFilter(this.state.valueC, 'core'); //handles applying core filter
+      console.log(`You set a value: ${this.state.valueC} for C`);
       this.setState({valueR: null, valueP: null, valueC: null});
     }else if (this.state.valueP){
-      this.props.setDynamicFilter(this.state.valueP, 'payload');
+      this.props.setDynamicFilter(this.state.valueP, 'payload');//handles applying payload filter
+      console.log(`You set a value: ${this.state.valueP} for P`);
       this.setState({valueR: null, valueP: null, valueC: null});
     }else if (this.state.valueR){
-      this.props.setDynamicFilter(this.state.valueR, 'rocket');
+      this.props.setDynamicFilter(this.state.valueR, 'rocket');//handles applying rocket filter
+      console.log(`You set a value: ${this.state.valueR} for R`);
       this.setState({valueR: null, valueP: null, valueC: null});
-    }else if (this.state.valueC === 'na'||this.state.valueP === 'na'||this.state.valueR === 'na'){
-      this.props.unsetDynamicFilter();
-      this.setState({valueR: null, valueP: null, valueC: null})
     }
 
 
@@ -98,6 +103,7 @@ class Filters extends Component{
         <p>Launch Catalogue</p>
         <span>Filter by:</span>
         <select name="success" value={this.state.value} onChange={this.handleChange}>
+
           <option value="na">-</option>
           <option value="successful">Successful</option>
           <option value="unsuccessful">Unsuccessful</option>

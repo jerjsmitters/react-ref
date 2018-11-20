@@ -2,13 +2,15 @@ import React from 'react';
 import ResultUnit from './ResultUnit';
 
 let resultArr = 'loading';
-
+let i=0;
 const Results = (props) => {
   function launchMap (arr){
-    return arr.map(result =>
-      <ResultUnit flight_number={result.flight_number}
+    return arr.map(result =>{
+      i+=1;
+      return <ResultUnit flight_number={result.flight_number}
                   launch_date_utc={result.launch_date_utc}
-                  showLaunchStateChanger={props.showLaunchStateChanger} />)
+                  showLaunchStateChanger={props.showLaunchStateChanger}
+                  key = {i} />})
     }
 
   function applyStaticFilter (arr, filter){

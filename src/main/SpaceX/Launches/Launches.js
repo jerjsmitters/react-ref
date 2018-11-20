@@ -29,9 +29,11 @@ class Launches extends Component{
   }
 
   payloadPopulator(arr){
-    const payloadArr = arr.map(payload=>
-      <li>Name: {payload.payload_id} ({payload.payload_type}) <br/> Mass:{payload.payload_mass_kg}kg</li>
-    );
+    let i=1;
+    const payloadArr = arr.map(payload=>{
+      i+=1;
+      return <li key={i}>Name: {payload.payload_id} ({payload.payload_type}) <br/> Mass:{payload.payload_mass_kg}kg</li>
+    });
     return payloadArr;
   }
 
@@ -39,7 +41,7 @@ class Launches extends Component{
     let i=0;
     const imgArray = arr.map(img=>{
       i+=1;
-      return <a href={img}>{i}</a>;
+      return <a href={img} key={i}>{i}</a>;
     })
     return imgArray;
   }
