@@ -2,8 +2,7 @@ import React from 'react';
 
 const DisplayedLaunch = (props) => {
 
-
-  if(props.activeState){
+  if(props.activeState){ 
     let index = props.activeState.substring(1);
     index = parseInt(index);
     let chosenLaunch = props.allLaunches[index-1];

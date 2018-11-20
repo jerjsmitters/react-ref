@@ -50,8 +50,6 @@ class Launches extends Component{
 
   render(){
 
-
-
     return(
       <div id="launchCont" className="mainContainer">
         <LaunchIntro /> {/*always mounted at top*/}
