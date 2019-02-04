@@ -79,7 +79,7 @@ class Filters extends Component{
       this.props.setStaticFilter(this.state.value); //handles applying the two static filters
       this.setState({value: null});
       console.log('You set a static value');
-    }else if (this.state.valueC ==='na'|| this.state.valueP ==='na' || this.state.valueR ==='na'){ //resets filters
+    }else if (this.state.valueC ==='na' || this.state.valueP ==='na' || this.state.valueR ==='na'){ //resets filters
       this.props.setDynamicFilter(null, 'na');
       console.log('You reset the dynamic filters');
       this.setState({valueR: null, valueP: null, valueC: null});
@@ -100,31 +100,36 @@ class Filters extends Component{
 
     return(
       <div id="filters">
-        <p>Launch Catalogue</p>
-        <span>Filter by:</span>
-        <select name="success" value={this.state.value} onChange={this.handleChange}>
-
-          <option value="na">-</option>
-          <option value="successful">Successful</option>
-          <option value="unsuccessful">Unsuccessful</option>
-        </select>
-        <select name="time" value={this.state.value} onChange={this.handleChange}>
-          <option value="na">-</option>
-          <option value="past">Past</option>
-          <option value="future">Future</option>
-        </select>
-        <select name="rocketName" value={this.state.valueR} onChange={this.handleChangeR}>
-          <option value="na">-</option>
-          {rocketsFilterArr}
-        </select>
-        <select name="payloadName" value={this.state.valueP} onChange={this.handleChangeP}>
-          <option value="na">-</option>
-          {payloadFilterArr}
-        </select>
-        <select name="coresName" value={this.state.valueC} onChange={this.handleChangeC}>
-          <option value="na">-</option>
-          {coresFilterArr}
-        </select>
+        <p id="launchTitle">Launch Catalogue</p>
+        <div id="filterBox">
+          <label>Success</label>
+          <select name="success" value={this.state.value} onChange={this.handleChange}>
+            <option value="na">-</option>
+            <option value="successful">Successful</option>
+            <option value="unsuccessful">Unsuccessful</option>
+          </select>
+          <label>Timeframe</label>
+          <select name="time" value={this.state.value} onChange={this.handleChange}>
+            <option value="na">-</option>
+            <option value="past">Past</option>
+            <option value="future">Future</option>
+          </select>
+          <label>Rocket type</label>
+          <select name="rocketName" value={this.state.valueR} onChange={this.handleChangeR}>
+            <option value="na">-</option>
+            {rocketsFilterArr}
+          </select>
+          <label>Payload type</label>
+          <select name="payloadName" value={this.state.valueP} onChange={this.handleChangeP}>
+            <option value="na">-</option>
+            {payloadFilterArr}
+          </select>
+          <label>Core type</label>
+          <select name="coresName" value={this.state.valueC} onChange={this.handleChangeC}>
+            <option value="na">-</option>
+            {coresFilterArr}
+          </select>
+        </div>
       </div>
     )
   }

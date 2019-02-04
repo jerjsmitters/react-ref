@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Filters from'./Filters.js';
 import Results from './Results.js';
-import DisplayedLaunch from './DisplayedLaunch';
+import DisplayedLaunchNewTemplate from './DisplayedLaunchNewTemplate';
 
 
 
@@ -28,7 +28,7 @@ class MainLaunch extends Component {
 
   whichLaunchStateIsActive(state){ //Loops to see which state is true
     for (let key in state){
-      if(state[key] && key.length <=3){ //such that only the active states are supplied to display launch to parse for index
+      if(state[key] && key.length <= 3){ //such that only the active states are supplied to display launch to parse for index
         return key
       }
     }
@@ -66,13 +66,12 @@ class MainLaunch extends Component {
         {(!this.whichLaunchStateIsActive(this.state)) ? (<Results allLaunches={this.props.allLaunches}
                                                                   showLaunchStateChanger={this.showLaunchStateChanger}
                                                                   mainLaunchState={this.state}/>) : null}
-        <DisplayedLaunch allLaunches={this.props.allLaunches}
+        <DisplayedLaunchNewTemplate allLaunches={this.props.allLaunches}
                           payloadPopulator={this.props.payloadPopulator}
                           corePopulator={this.props.corePopulator}
                           activeState={this.whichLaunchStateIsActive(this.state)}
                           imagePopulator={this.props.imagePopulator}
-                          setInitState={this.setInitState}
-                          />
+                          setInitState={this.setInitState}/>
       </div>
     )
   }

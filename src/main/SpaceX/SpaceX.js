@@ -3,10 +3,7 @@ import {Route} from "react-router-dom";
 import {Switch} from "react-router-dom";
 import About from './About/About.js';
 import Launches from './Launches/Launches.js';
-import Vehicles from './Vehicles/Vehicles.js';
-import Tech from './Tech/Tech.js';
 import NotFound from './../../Universal/NotFound.js'
-import SpaceXNav from './SpaceXNav';
 
 
 
@@ -38,7 +35,6 @@ class SpaceX extends Component{
                   launchPads: '',
                   landingPads: '',
                   payLoads:''
-
                 };
   }
 
@@ -95,7 +91,7 @@ class SpaceX extends Component{
                          dragons: this.state.dragons,
                          rockets: this.state.rockets};
 
-    const techData = {capsules: this.state.capsules,
+    const componentData = {capsules: this.state.capsules,
                       cores: this.state.cores,
                       launchPads: this.state.launchPads,
                       landingPads: this.state.landingPads,
@@ -104,12 +100,9 @@ class SpaceX extends Component{
 
     return(
         <div className = "spaceXContain">
-          <SpaceXNav />
           <Switch>
             <Route path= "/spacex/about" render ={ () => <About about={aboutData}/>} />
             <Route path = "/spacex/launches" render={ () => <Launches launches={launchData}/>} />
-            <Route path = "/spacex/vehicles" render={ () => <Vehicles vehicles={vehicleData}/>} />
-            <Route path = "/spacex/tech" render={ () => <Tech tech={techData}/>} />
             <Route component = {NotFound} />
           </Switch>
         </div>

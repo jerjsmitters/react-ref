@@ -89,7 +89,8 @@ class WhenCanISee extends Component{
         <ISSTimes
           beginTime={entry.risetime}
           duration={entry.duration}
-          key = {this.state.timearray.indexOf(entry)} />
+          key = {this.state.timearray.indexOf(entry)}
+          convert={this.props.convert} />
       )
     )} else {
       return null
@@ -101,35 +102,44 @@ class WhenCanISee extends Component{
   render() {
     return(
       <div id="whenCanISee">
-        <h2>When can I see it?</h2>
+        <h1>When can I see it?</h1>
         <form>
           <p>Please enter your address. Feel free to only leave some fields blank (within reason, don't just type in your country).</p>
-          <label>House number</label>
-          <input
+          <div id="ISSformBox">
+
+            <div id="ISSformFirstLine">
+              <div>
+                <label>House number</label>
+                <input
+                    type="text"
+                    value={this.state.house}
+                    onChange={this.handleChangeHouse} />
+              </div>
+              <div>
+                <label>Street</label>
+                <input
+                    type="text"
+                    value={this.state.street}
+                    onChange={this.handleChangeStreet} />
+              </div>
+            </div>
+            <label>City</label>
+            <input
               type="text"
-              value={this.state.house}
-              onChange={this.handleChangeHouse} />
-              <label>Street</label>
-          <input
+              value={this.state.city}
+              onChange={this.handleChangeCity} />
+            <label>Postcode</label>
+            <input
               type="text"
-              value={this.state.street}
-              onChange={this.handleChangeStreet} />
-          <label>City</label>
-          <input
-            type="text"
-            value={this.state.city}
-            onChange={this.handleChangeCity} />
-          <label>Postcode</label>
-          <input
-            type="text"
-            value={this.state.postcode}
-            onChange={this.handleChangePostcode} />
-          <label>Country</label>
-          <input
-            type="text"
-            value={this.state.country}
-            onChange={this.handleChangeCountry} />
-          <button onClick = {e => this.handleSubmit(e)}>Submit</button>
+              value={this.state.postcode}
+              onChange={this.handleChangePostcode} />
+            <label>Country</label>
+            <input
+              type="text"
+              value={this.state.country}
+              onChange={this.handleChangeCountry} />
+            <button onClick = {e => this.handleSubmit(e)}>Submit</button>
+          </div>
           <ul>{this.renderTimes()}</ul>
         </form>
       </div>

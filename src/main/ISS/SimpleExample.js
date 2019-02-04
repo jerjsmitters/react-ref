@@ -11,7 +11,7 @@ export default class SimpleExample extends Component<{}, State> {
   state = {
     lat: this.props.lat,
     lng: this.props.long,
-    zoom: 5,
+    zoom: 4,
   }
 
   render() {

@@ -23,7 +23,6 @@ class Missions extends Component {
   }
 
 
-
   render(){
     let missionArray;
     let missionNames;
@@ -35,6 +34,7 @@ class Missions extends Component {
                       mission_name = {mission.mission_name}
                       manufacturers = {mission.manufacturers}
                       payload_ids = {mission.payload_ids}
+                      website = {mission.website}
                       wikipedia = {mission.wikipedia}
                       twitter = {mission.twitter}
                       description = {mission.description}
@@ -62,7 +62,8 @@ class Missions extends Component {
 
     return(
       <div id="missionCont">
-      {displayedMission}
+        {(this.state.menu) ? (<h1>Current Missions</h1>) : null}
+        {displayedMission}
       </div>
     )
   }

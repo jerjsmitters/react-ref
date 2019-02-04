@@ -7,7 +7,7 @@ const MissionMenu = (props) => {
       <button onClick={()=>props.missionState('m'+props.missionNames.indexOf(missionName).toString())}>{missionName}</button>)}
       console.log(buttons)
   return(
-    <div>
+    <div id="missionBtnBox">
       {buttons}
     </div>
   )

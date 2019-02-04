@@ -57,10 +57,10 @@ class AchievementsTL extends Component{
 
     const settings = {
          dots: true,
-         draggable: false,
+         draggable: true,
          speed: 800,
-         slidesToShow: 6,
-         slidesToScroll:6,
+         slidesToShow: 8,
+         slidesToScroll:8,
          edgeFriction: 0,
          rtl: true,
          infinite: false,
@@ -69,14 +69,16 @@ class AchievementsTL extends Component{
 
     return(
       <div id="achCont">
-        <h1>Company Milestones</h1>
+        <h1>Company Achievements</h1>
         <div id="timelineCont">
           <Slider {...settings}>
             {achieveArray}
           </Slider>
-          <ReactModal isOpen={this.state.showModal}>
+          <ReactModal isOpen={this.state.showModal
+
+                              }>
             {achieveArrayFull[this.state.activeModal]}
-            <button onClick={this.handleCloseModal}>Close Modal</button>
+            <button id ="closeModalButton" onClick={this.handleCloseModal}>Close Modal</button>
           </ReactModal>
         </div>
       </div>

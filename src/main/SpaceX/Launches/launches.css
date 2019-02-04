@@ -1,21 +1,17 @@
-
-/*intro at top, next to right, previous to left, main in middle*/
 #launchCol {
   display:flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
+  margin: auto auto;
 }
-
-#mainLaunch{
-  border: 1px solid black;
-  height: 600px;
-  width: 1075px;
-  overflow-y: scroll;
+#launchCol *{
+  font-family: arial;
 }
 
 #latestLaunch,
 #nextLaunch {
-height: 600px;
+height: 620px;
 width: 325px;
 border: 1px solid black;
 }
@@ -35,19 +31,48 @@ border: 1px solid black;
 }
 
 /*****Main launch*****/
-/**filters**/
-#filters{
-  height: 70px;
-  border-bottom: 1px solid black;
-  position:sticky;
-  top:0px;
+#mainLaunch{
+  border: 1px solid black;
+  height: 620px;
+  width: 1075px;
+  overflow-y: scroll;
 }
 
-#filters>p {
-  margin-top:0;
+/******filters and title******/
+#launchTitle{
+  margin: 0 0 14px;
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
 }
+
+#filters{
+  height: 100px;
+  border-bottom: 1px solid black;
+  background-color: rgb(130, 32, 50);
+  position:sticky;
+  top:0px;
+  padding: 20px 10px;
+}
+
+#filterBox{
+  display: flex;
+  justify-content: space-around;
+}
+
+#filters label{
+  color: white;
+  margin-right: 5px;
+}
+#filters label:not(:first-of-type) {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+
 /***results***/
 #results {
+  padding: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -60,4 +85,56 @@ border: 1px solid black;
   width: 150px;
   height: 150px;
   border: 1px solid black;
+  background-color: rgb(130, 32, 50);
 }
+
+#launchNumber, #launchDate{
+  text-align:center;
+  color: white;
+  letter-spacing: 0.4px;
+  font-size: 24px;
+}
+
+#launchNumber{
+  margin-top: 45px;
+  margin-bottom: 0;
+}
+#launchDate{
+  margin-top: 10px;
+}
+
+/*******Displayed launch******/
+#displayedLaunch{
+  position: relative;
+}
+
+#disLaunchContent{
+  margin: 0 auto;
+
+}
+
+#disLaunchTitle{
+  display: flex;
+  justify-content: center;
+}
+#disLaunchTitle h1:first-of-type{
+  margin-right: 20px;
+}
+
+#disLaunchTitle h1:last-of-type{
+  font-size: 32px
+}
+
+#displayLaunchReturnBtn{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 35px;
+  width: 40px;
+  font-size: 18px;
+  letter-spacing: 0.9px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/******Latest Launch******/

@@ -17,7 +17,7 @@ const Achievements = (props) => {
                     reddit ={achievement.links.reddit}/>
                   )
                 } else{
-                    achieveArray='<h1>Please wait...</h1>'
+                    achieveArray=<h1>Please wait...</h1>
                   }
 
   return(

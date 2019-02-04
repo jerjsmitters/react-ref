@@ -12,24 +12,27 @@ const MissionUnit = (props) => {
 
     return(
       <div class="missionUnit">
-        <button onClick={()=>props.backButton()}>Menu</button>
+        <button id="missionHomeBtn" onClick={()=>props.backButton()}>←</button>
         <ul>
-          <li><h3>{props.mission_name}</h3></li>
-          <li>Manufacturer(s)
-            <ul>
+          <li id="missionTitle"><h1>{props.mission_name}</h1>
+            <span id="missionLinks">
+              {(props.wikipedia) ? (<a href={props.wikipedia}>Wiki</a>) : null}
+              {(props.twitter) ? (<a href={props.twitter}>Twitter</a>) : null}
+              {(props.website) ? (<a href={props.website}>Mission Site</a>) : null}
+            </span>
+          </li>
+          <li><h4>Manufacturer(s)</h4>
+            <ul id="missionUnitManu">
               {manuArray}
             </ul>
           </li>
-          <li>Payload(s)
-            <ul>
+          <li><h4>Payload(s)</h4>
+            <ul id="missionUnitPayload">
               {payloadArr}
             </ul>
           </li>
-          <li>{props.description}</li>
-          <li>Read more about it here: {props.wikipedia}</li>
+          <li id="missionUnitDescription">{props.description}</li>
 
-          <li>Website: {props.website}</li>
-          <li>Twitter: {props.twitter}</li>
         </ul>
       </div>
     )

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import LaunchIntro from './LaunchIntro.js';
 import MainLaunch from './MainLaunch.js';
 import NextLaunch from './NextLaunch.js';
 import LatestLaunch from './LatestLaunch.js';
@@ -24,15 +23,20 @@ class Launches extends Component{
   }
   corePopulatorFut(arr){
     for (let i=0;i<arr.length; i++){
-      return <li>Core Name: {arr[i].core_serial}</li>;
+      return (
+        <li>Core Name: {arr[i].core_serial}</li>
+      );
     }
   }
 
-  payloadPopulator(arr){
+  payloadPopulator(arr, past){
+
     let i=1;
     const payloadArr = arr.map(payload=>{
       i+=1;
-      return <li key={i}>Name: {payload.payload_id} ({payload.payload_type}) <br/> Mass:{payload.payload_mass_kg}kg</li>
+      return <li key={i}>Name: {payload.payload_id} ({payload.payload_type}) <br/>
+                         Mass: {(payload.payload_mass_kg) ? (payload.payload_mass_kg+'kg') : 'Unknown'} <br/>
+                        {(past) ? ('Was it reused? '+((payload.reused) ? 'Yup!' : 'Nope!')) : null} </li>
     });
     return payloadArr;
   }
@@ -54,7 +58,6 @@ class Launches extends Component{
 
     return(
       <div id="launchCont" className="mainContainer">
-        <LaunchIntro /> {/*always mounted at top*/}
         <div id = "launchCol">
           <LatestLaunch latestLaunch={this.props.launches.latestLaunch}
                         payloadPopulator={this.payloadPopulator}
